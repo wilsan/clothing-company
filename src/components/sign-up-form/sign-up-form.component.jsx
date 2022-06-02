@@ -51,7 +51,7 @@ function SignUpForm() {
 
    return (
       <div className='sign-up-container'>
-         <h2>Don't have an account</h2>
+         <h2>Do not have an account?</h2>
          <span>Sign up with your email and password</span>
          <form action="" onSubmit={handleSubmit}>
             <FormInput
@@ -60,28 +60,32 @@ function SignUpForm() {
                required
                onChange={handleChange}
                name="displayName"
-               value={displayName} />
+               value={displayName}
+            />
             <FormInput
                label="Email"
                type="email"
                required
                onChange={handleChange}
                name="email"
-               value={email} />
+               value={email}
+            />
             <FormInput
                label="Password"
                type="password"
                required
                onChange={handleChange}
                name="password"
-               value={password} />
+               value={password}
+            />
             <FormInput
                label="Confirm Password"
                type="password"
                required
                onChange={handleChange}
                name="confirmPassword"
-               value={confirmPassword} />
+               value={confirmPassword}
+            />
             <Button type='submit'>Sign Up</Button>
          </form>
       </div>
