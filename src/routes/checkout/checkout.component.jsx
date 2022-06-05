@@ -1,11 +1,24 @@
-import CheckoutItems from "../../components/checkout-items/checkout-items.component";
+import { useContext } from 'react';
+
+import { CartContext } from '../../contexts/cart.context';
 
 import './checkout.styles.scss';
 
 function Checkout() {
+   const { cartItems, addItemToCart, removeItemFromCart } = useContext(CartContext);
    return (
       <div>
-         <CheckoutItems />
+         {cartItems.map(item => {
+            const { id, name, quantity } = item;
+            return (
+               <div key={id}>
+                  <h2>{name}</h2>
+                  <span>{quantity}</span>
+                  <span onClick={() => removeItemFromCart(item)}>decrement</span>
+                  <span onClick={() => addItemToCart(item)}>increment</span>
+               </div>
+            );
+         })}
       </div>
    );
 }
