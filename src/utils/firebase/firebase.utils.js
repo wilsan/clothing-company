@@ -13,7 +13,9 @@ import {
    getFirestore,
    doc,
    getDoc,
-   setDoc
+   setDoc,
+   collection,
+   writeBatch
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -41,6 +43,20 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 
 export const db = getFirestore();
 
+// Add the initial collection of documents of all the products into the database
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+   const collectionRef = collection(db, collectionKey);
+   const batch = writeBatch(db);
+
+   objectsToAdd.forEach((object) => {
+      const docRef = doc(collectionRef, object.title.toLowerCase());
+      batch.set(docRef, object);
+   });
+
+   await batch.commit();
+   console.log('done');
+};
+
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
    if (!userAuth) return;
 
@@ -63,19 +79,19 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
    }
 
    return userDocRef;
-}
+};
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
    if (!email || !password) return;
 
    return await createUserWithEmailAndPassword(auth, email, password);
-}
+};
 
 export const signInUserWithEmailAndPassword = async (email, password) => {
    if (!email || !password) return;
 
    return await signInWithEmailAndPassword(auth, email, password);
-}
+};
 
 export const signOutUser = async () => await signOut(auth);
 
