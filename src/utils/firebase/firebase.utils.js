@@ -45,7 +45,7 @@ export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googlePro
 
 export const db = getFirestore();
 
-// Create a collection of all the categories and products in the database
+// Create a collection of all the products in the database
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
    const collectionRef = collection(db, collectionKey);
    const batch = writeBatch(db);
@@ -59,7 +59,7 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
    console.log('done');
 };
 
-// Get all the categories and products from the collection
+// Get all the products from the database
 export const getCategoriesAndDocuments = async () => {
    const collectionRef = collection(db, 'categories');
    const q = query(collectionRef);
@@ -74,6 +74,7 @@ export const getCategoriesAndDocuments = async () => {
    return categoryMap;
 };
 
+// Create a new user document, if it does not exist, from the authenticated user's details
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
    if (!userAuth) return;
 
@@ -98,18 +99,22 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
    return userDocRef;
 };
 
+// Create a new user using email and password from the sign-up form
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
    if (!email || !password) return;
 
    return await createUserWithEmailAndPassword(auth, email, password);
 };
 
+// Sign-in a user using email and password
 export const signInUserWithEmailAndPassword = async (email, password) => {
    if (!email || !password) return;
 
    return await signInWithEmailAndPassword(auth, email, password);
 };
 
+// Sign-out a user
 export const signOutUser = async () => await signOut(auth);
 
+// Add an observer for changes to the user's sign-in state
 export const onAuthStateChangedListner = (callback) => onAuthStateChanged(auth, callback);
