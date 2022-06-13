@@ -1,18 +1,17 @@
-import './category-item.styles.scss';
+import './category-item.styles.jsx';
+import { CategoryItemContainer, BackgroundImage, Body } from './category-item.styles.jsx';
 
 function CategoryItem({ category }) {
    const { imageUrl, title } = category;
 
    return (
-      <div className="category-container">
-         <div className="background-image" style={
-            { backgroundImage: `url(${imageUrl})` }
-         } />
-         <div className="category-body-container">
+      <CategoryItemContainer>
+         <BackgroundImage imageUrl={imageUrl} />
+         <Body>
             <h2>{title.toUpperCase()}</h2>
             <p>Shop Now</p>
-         </div>
-      </div>
+         </Body>
+      </CategoryItemContainer>
    )
 }
 
