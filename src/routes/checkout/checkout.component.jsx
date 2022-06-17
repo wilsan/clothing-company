@@ -8,7 +8,7 @@ import './checkout.styles.jsx';
 import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from './checkout.styles.jsx';
 
 function Checkout() {
-   const { cartItems, total } = useContext(CartContext);
+   const { cartItems, cartTotal } = useContext(CartContext);
    return (
       <CheckoutContainer>
          <CheckoutHeader>
@@ -21,7 +21,7 @@ function Checkout() {
          {cartItems.map(item =>
             <CheckoutItem key={item.id} item={item} />
          )}
-         <Total>Total: ₹{total}</Total>
+         <Total>Total: ₹{cartTotal}</Total>
       </CheckoutContainer>
    );
 }
