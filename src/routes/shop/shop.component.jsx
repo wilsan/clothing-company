@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import CategoriesPreview from '../categories-preview/categories-preview.component';
 import Category from '../category/category.component';
 
-import { CategoriesProvider } from '../../contexts/categories.context';
 import { setCategories } from '../../store/categories/categoriesSlice';
 
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils';
@@ -23,12 +22,10 @@ function Shop() {
    }, []);
 
    return (
-      // <CategoriesProvider>
-         <Routes>
-            <Route index element={<CategoriesPreview />} />
-            <Route path=':category' element={<Category />} />
-         </Routes>
-      // </CategoriesProvider>
+      <Routes>
+         <Route index element={<CategoriesPreview />} />
+         <Route path=':category' element={<Category />} />
+      </Routes>
    );
 }
 

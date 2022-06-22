@@ -1,5 +1,4 @@
 import './cart-item.styles.jsx';
-
 import { CartItemContainer, ItemDetails, Name } from './cart-item.styles.jsx';
 
 function CartItem({ item }) {
