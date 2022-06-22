@@ -9,6 +9,7 @@ import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component
 import { UserContext } from '../../contexts/user.context';
 import { CartContext } from '../../contexts/cart.context';
 import { selectCurrentUser } from '../../store/user/userSlice';
+import { selectIsCartOpen } from '../../store/cart/cart.selector';
 
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
@@ -17,8 +18,9 @@ import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigat
 
 function Navigation() {
    // const { currentUser } = useContext(UserContext);
-   const { isCartOpen } = useContext(CartContext);
+   // const { isCartOpen } = useContext(CartContext);
    const currentUser = useSelector(selectCurrentUser);
+   const isCartOpen = useSelector(selectIsCartOpen);
 
    return (
       <Fragment>
