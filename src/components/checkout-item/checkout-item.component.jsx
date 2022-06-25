@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { addItemToCart, removeItemFromCart, clearItemFromCart } from '../../store/cart/cartSlice';
+import { addItemToCart, removeItemFromCart, clearItemFromCart } from '../../store/cart/cart-slice';
 
 import './checkout-item.styles.jsx';
 import { ImageContainer, CheckoutItemContainer, RemoveButton } from './checkout-item.styles.jsx';

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { addItemToCart } from '../../store/cart/cartSlice';
+import { addItemToCart } from '../../store/cart/cart-slice';
 
 import Button, { BUTTON_TYPE } from '../button/button.component';
 

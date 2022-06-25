@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setIsCartOpen } from '../../store/cart/cartSlice';
+import { setIsCartOpen } from '../../store/cart/cart-slice';
 import { selectCartItems } from '../../store/cart/cart.selector';
 
 import Button from '../button/button.component';
