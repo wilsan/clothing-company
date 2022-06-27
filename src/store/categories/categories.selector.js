@@ -9,3 +9,8 @@ export const selectCategoriesMap = createSelector(
          return acc;
       }, {})
 );
+
+export const selectCategoriesFetchStatus = createSelector(
+   [state => state.categories],
+   (categoriesSlice) => categoriesSlice.status
+);

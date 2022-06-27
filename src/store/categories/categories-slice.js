@@ -18,11 +18,11 @@ export const categoriesSlice = createSlice({
    name: 'categories',
    initialState,
 
-   reducers: {
-      setCategories: (state, action) => {
-         state.categoriesArray = action.payload
-      }
-   },
+   // reducers: {
+   //    setCategories: (state, action) => {
+   //       state.categoriesArray = action.payload
+   //    }
+   // },
 
    extraReducers: (builder) => {
       builder
