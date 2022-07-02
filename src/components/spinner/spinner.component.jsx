@@ -1,9 +1,11 @@
-import { SpinnerContainer, SpinnerOverlay } from "./spinner.styles";
+import { SpinnerContainer, SpinnerOverlay, SpinnerBackground } from "./spinner.styles";
 
 function Spinner() {
    return (
       <SpinnerOverlay>
-         <SpinnerContainer />
+         <SpinnerBackground>
+            <SpinnerContainer />
+         </SpinnerBackground>
       </SpinnerOverlay>
    );
 }

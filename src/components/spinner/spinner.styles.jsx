@@ -1,15 +1,26 @@
 import styled from "styled-components";
 
 export const SpinnerOverlay = styled.div`
-   height: 60vh;
-   width: 100%;
+   position: absolute;
+   top: 40vh; left: 50%;
+   transform: translate(-50%, -50%);
+`;
+
+export const SpinnerBackground = styled.div`
+   height: 90px;
+   width: 100px;
    display: flex;
    justify-content: center;
    align-items: center;
+   border-radius: 10px;
+   border: 1px solid grey;
+   background-color: white;
 `;
 
 export const SpinnerContainer = styled.div`
-   display: inline-block;
+   display: flex;
+   justify-content: center;
+   align-items: center;
    width: 50px;
    height: 50px;
    border: 3px solid rgba(195, 195, 195, 0.6);

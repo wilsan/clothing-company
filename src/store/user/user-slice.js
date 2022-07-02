@@ -33,6 +33,9 @@ export const userSlice = createSlice({
             state.status = 'idle';
             state.currentUser = action.payload;
          })
+         .addCase(getCurrentUserSnapshot.rejected, (state) => {
+            state.status = 'idle';
+         })
          // Sign in with Google
          .addCase(signInWithGoogle.pending, (state) => {
             state.status = 'loading';
@@ -40,6 +43,9 @@ export const userSlice = createSlice({
          .addCase(signInWithGoogle.fulfilled, (state, action) => {
             state.status = 'idle';
             state.currentUser = action.payload;
+         })
+         .addCase(signInWithGoogle.rejected, (state) => {
+            state.status = 'idle';
          })
          // Sign in with email and password
          .addCase(signInWithEmail.pending, (state) => {
