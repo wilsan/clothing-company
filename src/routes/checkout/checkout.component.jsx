@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
-import PaymentForm from '../../components/payment-form/payment-form.component';
+import Button from '../../components/button/button.component';
 
 import './checkout.styles.jsx';
 import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from './checkout.styles.jsx';
@@ -11,6 +12,9 @@ import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from './checkou
 function Checkout() {
    const cartItems = useSelector(selectCartItems);
    const cartTotal = useSelector(selectCartTotal);
+   const navigate = useNavigate();
+
+   const onNavigateHandler = () => navigate('/payment');
 
    return (
       <CheckoutContainer>
@@ -25,7 +29,7 @@ function Checkout() {
             <CheckoutItem key={item.id} item={item} />
          )}
          <Total>Total: ₹{cartTotal}</Total>
-         <PaymentForm />
+         <Button onClick={onNavigateHandler}>Proceed to payment</Button>
       </CheckoutContainer>
    );
 }

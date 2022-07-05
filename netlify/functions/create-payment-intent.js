@@ -1,5 +1,3 @@
-const { async } = require('@firebase/util');
-
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -9,7 +7,7 @@ exports.handler = async (event) => {
       const paymentIntent = await stripe.paymentIntents.create({
          amount,
          currency: 'inr',
-         payment_method_types: ['card']
+         automatic_payment_methods: { enabled: true }
       });
 
       return {

@@ -1,69 +1,78 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 
-import { selectCartTotal } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 
-import Button, { BUTTON_TYPE } from '../button/button.component';
+import { BUTTON_TYPE } from '../button/button.component';
 
 import { PaymentFormContainer, FormContainer, PaymentButton } from './payment-form.styles';
 
 function PaymentForm() {
    const stripe = useStripe();
    const elements = useElements();
-   const amount = useSelector(selectCartTotal);
    const currentUser = useSelector(selectCurrentUser);
-   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
+
+   useEffect(() => {
+      if (!stripe)
+         return;
+
+      const clientSecret = new URLSearchParams(window.location.search).get(
+         'payment_intent_client_secret'
+      );
+
+      if (!clientSecret)
+         return;
+
+      stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+         switch (paymentIntent.status) {
+            case "succeeded":
+               alert("Payment succeeded!");
+               break;
+            case "processing":
+               alert("Your payment is processing.");
+               break;
+            case "requires_payment_method":
+               alert("Your payment was not successful, please try again.");
+               break;
+            default:
+               alert("Something went wrong.");
+               break;
+         }
+      });
+   }, [stripe]);
 
    const handlePayment = async (e) => {
       e.preventDefault();
       if (!stripe || !elements)
          return;
 
-      setIsProcessingPayment(true);
+      setIsLoading(true);
 
-      const response = await fetch('/.netlify/functions/create-payment-intent', {
-         method: 'post',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({ amount: amount * 100 })
-      }).then(res => res.json());
-
-      const { paymentIntent: { client_secret } } = response;
-      const paymentResult = await stripe.confirmCardPayment(
-         client_secret,
-         {
-            payment_method: {
-               card: elements.getElement(CardElement),
-               billing_details: {
-                  name: currentUser ? currentUser.displayName : 'Guest'
-               }
-            }
+      const { error } = await stripe.confirmPayment({
+         elements,
+         confirmParams: {
+            return_url: 'http://localhost:8888'
          }
-      );
+      });
 
-      setIsProcessingPayment(false);
+      if (error.type === 'card_error' || error.type === 'validation_error')
+         alert(error.message);
+      else
+         alert('An unexpected error occured');
 
-      if (paymentResult.error)
-         console.log(paymentResult.error);
-         // alert(paymentResult.error);
-      else {
-         if (paymentResult.paymentIntent.status === 'succeeded')
-            alert('Payment Successful');
-            
-      }
+      setIsLoading(false);
    };
 
    return (
       <PaymentFormContainer>
-         <h2>Card Payment</h2>
+         <h2>Fill payment details</h2>
          <FormContainer onSubmit={handlePayment}>
-            <CardElement />
+            <PaymentElement />
             <PaymentButton
                buttonType={BUTTON_TYPE.inverted}
-               isLoading={isProcessingPayment}
+               isLoading={isLoading}
             >
                Pay now
             </PaymentButton>
