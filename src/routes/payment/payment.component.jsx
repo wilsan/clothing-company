@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Elements } from "@stripe/react-stripe-js";
-import { Route, Routes } from 'react-router-dom';
 
 import PaymentForm from "../../components/payment-form/payment-form.component";
-import PaymentSuccess from "../payment-success/payment-success.component";
 
 import { stripePromise } from '../../utils/stripe/stripe.utils';
 
@@ -35,16 +33,13 @@ function Payment() {
    };
 
    return (
-      <Routes>
-         <Route index element={
-            clientSecret && (
-               <Elements options={options} stripe={stripePromise}>
-                  <PaymentForm />
-               </Elements>
-            )
-         } />
-         <Route path="success" element={<PaymentSuccess />} />
-      </Routes>
+      <div>
+         {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+               <PaymentForm />
+            </Elements>
+         )}
+      </div>
    );
 }
 

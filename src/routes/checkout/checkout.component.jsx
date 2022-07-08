@@ -28,8 +28,10 @@ function Checkout() {
          {cartItems.map(item =>
             <CheckoutItem key={item.id} item={item} />
          )}
+
          <Total>Total: ₹{cartTotal}</Total>
-         <Button onClick={onNavigateHandler}>Proceed to payment</Button>
+         
+         {cartTotal ? <Button onClick={onNavigateHandler}>Proceed to payment</Button> : null}
       </CheckoutContainer>
    );
 }

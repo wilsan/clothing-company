@@ -8,6 +8,7 @@ import Authentication from './routes/authentication/authentication.component';
 import Shop from './routes/shop/shop.component';
 import Checkout from './routes/checkout/checkout.component';
 import Payment from './routes/payment/payment.component';
+import PaymentSuccess from './routes/payment-success/payment-success.component';
 
 
 import { getCurrentUserSnapshot } from './store/user/user.thunk';
@@ -26,7 +27,8 @@ function App() {
         <Route path='shop/*' element={<Shop />} />
         <Route path='auth' element={<Authentication />} />
         <Route path='checkout' element={<Checkout />} />
-        <Route path='payment/*' element={<Payment />} />
+        <Route path='payment' element={<Payment />} />
+        <Route path='payment-success' element={<PaymentSuccess />} />
       </Route>
     </Routes>
   );
