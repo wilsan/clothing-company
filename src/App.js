@@ -26,7 +26,7 @@ function App() {
         <Route path='shop/*' element={<Shop />} />
         <Route path='auth' element={<Authentication />} />
         <Route path='checkout' element={<Checkout />} />
-        <Route path='payment' element={<Payment />} />
+        <Route path='payment/*' element={<Payment />} />
       </Route>
     </Routes>
   );
