@@ -35,6 +35,7 @@ function Navigation() {
                <NavLink to='/shop'>SHOP</NavLink>
                {currentUser ? (
                   <Fragment>
+                     {!currentUser.displayName && window.location.reload()}
                      <NavLink as='span' onClick={handleSignOut}>SIGN OUT</NavLink>
                      <UserAccount />
                   </Fragment>
