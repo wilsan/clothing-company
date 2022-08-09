@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCurrentUserSnapshot());
+    dispatch(getCurrentUserSnapshot());  // get the logged in user
   }, []);
 
   return (
